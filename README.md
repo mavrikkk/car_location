@@ -19,12 +19,14 @@
 https://livegpstracks.com/dv_USERID.html
 </code></pre>
 <p>где USERID – цифровой ID вашей шары, он пригодится нам вдальнейшем</p>
+<p>Содержимое папки "car_location" скопировать в директорию "config_folder_homeassistant/custom_components/car_location". Не забывайте про права на созданные директории и файлы.</p>
 <h3>ENG</h3>
 <p>You need to register in the livegpstracks service and connect the tracker (the site has detailed instructions for various models) to it. After that, through the toolbar on the site we create a private link for tracking. The link looks like:</p> 
 <pre><code>
 https://livegpstracks.com/dv_USERID.html
 </code></pre>
 <p>here USERID – is ID of your livegpstracks share, it will be needed to us further </p>
+<p>Place the "car_location" folder to "config_folder_homeassistant/custom_components/". Do not forget about the rights to created folders and files.</p>
 
 <h1>Configuration</h1>
 <h3>RUS</h3>
