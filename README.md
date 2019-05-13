@@ -6,12 +6,6 @@
 <h3>ENG</h3>
 <p>This integration allows you to connect Sinotrack ST-901 GPS Tracker to HomeAssistant through <a href='https://livegpstracks.com/'>livegpstracks</a> service</p>
 
-<h1>How it works</h1>
-<h3>RUS</h3>
-<p></p>
-<h3>ENG</h3>
-<p></p>
-
 <h1>Installation</h1>
 <h3>RUS</h3>
 <p>Регистрируемся в сервисе livegpstracks и подключаем свой трекер (на сайте есть подробные инструкции для различных моделей). После этого через панель инструментов на сайте создаем приватную ссылку для слежения. Ссылка имеет вид:</p> 
