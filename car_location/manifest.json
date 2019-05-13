@@ -1,0 +1,8 @@
+{
+  "domain": "car_location",
+  "name": "car_location",
+  "documentation": "https://github.com/mavrikkk/car_location",
+  "dependencies": [],
+  "codeowners": ["@mavrikkk"],
+  "requirements": []
+}
