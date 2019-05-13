@@ -20,7 +20,7 @@ https://livegpstracks.com/dv_USERID.html
 </code></pre>
 <p>где USERID – цифровой ID вашей шары, он пригодится нам вдальнейшем</p>
 <h3>ENG</h3>
-<p>Регистрируемся в сервисе livegpstracks и подключаем свой трекер (на сайте есть подробные инструкции для различных моделей). После этого через панель инструментов на сайте создаем приватную ссылку для слежения. Ссылка имеет вид:</p> 
+<p>You need to register in the livegpstracks service and connect the tracker (the site has detailed instructions for various models) to it. After that, through the toolbar on the site we create a private link for tracking. The link looks like:</p> 
 <pre><code>
 https://livegpstracks.com/dv_USERID.html
 </code></pre>
