@@ -26,7 +26,7 @@ https://livegpstracks.com/dv_USERID.html
 <h3>RUS</h3>
 <p>Добавьте в ваш файл конфигурации "configuration.yaml" следующие строки:</p>
 <pre><code>
-sensor:
+device_tracker:
   - platform: car_location
     name: car_sensor
     user: your_username
@@ -36,7 +36,7 @@ sensor:
 <h3>ENG</h3>
 <p>Add the following lines in the "configuration.yaml" file:</p>
 <pre><code>
-sensor:
+device_tracker:
   - platform: car_location
     name: car_sensor
     user: your_username
