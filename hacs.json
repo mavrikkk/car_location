@@ -1,0 +1,4 @@
+{
+    "name": "car_location",
+    "domains": ["sensor"]
+}
