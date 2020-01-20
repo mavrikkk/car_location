@@ -38,25 +38,5 @@ key | description
 :--- | :---  
 **platform (Required)** | The platform name (имя платформы)
 **name (Option)** | The name of this element in HA interface (имя элемента в интерфейсе HA)
-**haddr (Required)** | base_url of HA (base_url вашего HA)
-**entityid (Required)** | the HA entityid of your device_tracker (это ID вашего устройства, за которым будете наблюдать)
-**timezone (Required)** | is your timezone, for example '+03:00' (ваш часовой пояс, например '+03:00')
-**token (Required)** | the access token previously received in the frontend of HomeAssistant to use REST API (предварительно полученный во фронтенде HomeAssistant токен доступа для использования REST API)
-  
-  
-  
-**!!!IMPORTANT!!! after installation instructions**
-
-<p>After installation the map will be at your_address_homeassistant/local/route/index.html. If you wish, you can add it to the HA menu using panel_iframe or to any HA window via the lovelace card “iframe” (После установки карта будет доступна по прямой ссылке: your_address_homeassistant/local/route/index.html. При желании вы можете добавить ее в меню HA с помощью panel_iframe или в любое окно HA через lovelace card “iframe”).</p>
-
-
-
-**Screenshots (very blurred!!!)**
-
-![example][exampleimg]
-
-
-
-***
-
-[exampleimg]: map.jpeg
+**user (Required)** | the username, you registered with on livegpstracks (пользователь, под которым вы регистрировались в сервисе livegpstracks)
+**myid (Required)** | the ID of your livegpstracks share (цифровой ID, который присваивается расшаренной ссылке)
