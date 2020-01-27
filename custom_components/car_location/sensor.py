@@ -1,77 +1,30 @@
 #!/usr/local/bin/python3
 # coding: utf-8
 
-import time
-import requests
-import json
-import math
-
-import logging
-
-from datetime import datetime
-from datetime import timedelta
-
-import voluptuous as vol
-import homeassistant.helpers.config_validation as cv
-from homeassistant.components.sensor import PLATFORM_SCHEMA
-from homeassistant.const import (CONF_NAME)
+from . import DOMAIN
 from homeassistant.helpers.entity import Entity
-
-_LOGGER = logging.getLogger(__name__)
-
-CONF_USER = 'user'
-CONF_ID = 'myid'
-CONF_NAME = 'name'
+from homeassistant.const import (ATTR_LATITUDE, ATTR_LONGITUDE)
 
 ATTR_SPEED = 'speed'
-ATTR_LAT = 'latitude'
-ATTR_LON = 'longitude'
-DEFAULT_NAME = 'GPS_Sensor'
-
-SCAN_INTERVAL = timedelta(seconds=120)
-
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(CONF_USER): cv.string,
-    vol.Required(CONF_ID): cv.string,
-    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-})
-
-
-def setup_platform(hass, config, add_devices, discovery_info=None):
-
-    user = config.get(CONF_USER)
-    name = config.get(CONF_NAME)
-    myid = config.get(CONF_ID)
-
-    add_devices([CarGPS(name, user, myid)])
-    
-class CarGPS(Entity):
-
-    def __init__(self, name, user, myid):
-        self._name = name
-        self._user = user
-        self._myid = myid
-
-        self._lat = 0
-        self._lon = 0
-        self._speed = 0
-        self._last_upd = None
-
-        self.getInfoFrom()
 
 
 
-    def getInfoFrom(self, now=None):
-        try:
-            today = int(datetime.now().strftime("%s")) * 1000
-            response = requests.get('https://livegpstracks.com/viewer_coos_s.php', params={'username': self._user, 'ctp': 'one', 'code': self._myid, 'tgst': 'site', 'tgsv': 12, 'tkv11': today})
-            data = response.json()
-            self._lat = float(data[0]["lat"])
-            self._lon = float(data[0]["lng"])
-            self._speed = float(data[0]["speed"])
-            self._last_upd = data[0]["d"] + ' ' + data[0]["t"]
-        except:
-            _LOGGER.error('coudnt get parameters')
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None) -> None:
+
+    if discovery_info is None:
+        return
+
+    car_gps = hass.data[DOMAIN]["car_gps"]
+    async_add_entities([CarGPSSensor(car_gps)])
+
+
+
+class CarGPSSensor(Entity):
+
+    def __init__(self, car_gps):
+        self._name = 'car_gps_sensor'
+        self._icon = 'mdi:car'
+        self._car_gps = car_gps
 
 
 
@@ -81,17 +34,18 @@ class CarGPS(Entity):
         return self._name
 
     @property
-    def state(self):
-        return self._last_upd
+    def state(self) -> str:
+        return self._car_gps._last_upd
 
-    def update(self):
-        self.getInfoFrom()
+    @property
+    def icon(self):
+        return self._icon
 
     @property
     def device_state_attributes(self):
         attrs = {}
-        attrs[ATTR_LAT] = self._lat
-        attrs[ATTR_LON] = self._lon
-        attrs[ATTR_SPEED] = self._speed
+        attrs[ATTR_LATITUDE] = self._car_gps._lat
+        attrs[ATTR_LONGITUDE] = self._car_gps._lon
+        attrs[ATTR_SPEED] = self._car_gps._speed
         return attrs
     
