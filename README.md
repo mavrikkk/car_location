@@ -28,21 +28,17 @@ https://livegpstracks.com/dv_USERID.html
 <h3>RUS</h3>
 <p>Добавьте в ваш файл конфигурации "configuration.yaml" следующие строки:</p>
 <pre><code>
-device_tracker:
-  - platform: car_location
-    name: car_sensor
-    user: your_username
-    myid: 'your_share_id'
+car_location:
+  username: 'your_username'
+  client_id: 'your_share_id'
 </code></pre>
 <p>здесь "your_username" – пользователь, под которым вы регистрировались в сервисе livegpstracks, "your_share_id" – цифровой ID, который присваивается расшаренной ссылке</p>
 <h3>ENG</h3>
 <p>Add the following lines in the "configuration.yaml" file:</p>
 <pre><code>
-device_tracker:
-  - platform: car_location
-    name: car_sensor
-    user: your_username
-    myid: 'your_share_id'
+car_location:
+  username: 'your_username'
+  client_id: 'your_share_id'
 </code></pre>
 <p>here "your_username" is the username, you registered with on livegpstracks, "your_share_id" is ID of your livegpstracks share.</p>
 
