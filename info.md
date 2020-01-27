@@ -23,11 +23,9 @@ https://livegpstracks.com/dv_USERID.html
 **Example configuration.yaml:**
 
 ```yaml
-sensor:
-  platform: car_location
-  name: car_location
-  user: your_username
-  myid: 'your_share_id'
+car_location:
+  username: 'your_username'
+  client_id: 'your_share_id'
 ```
 
 
@@ -36,7 +34,6 @@ sensor:
   
 key | description  
 :--- | :---  
-**platform (Required)** | The platform name (имя платформы)
-**name (Option)** | The name of this element in HA interface (имя элемента в интерфейсе HA)
-**user (Required)** | the username, you registered with on livegpstracks (пользователь, под которым вы регистрировались в сервисе livegpstracks)
-**myid (Required)** | the ID of your livegpstracks share (цифровой ID, который присваивается расшаренной ссылке)
+**username (Required)** | the username, you registered with on livegpstracks (пользователь, под которым вы регистрировались в сервисе livegpstracks)
+**client_id (Required)** | the ID of your livegpstracks share (цифровой ID, который присваивается расшаренной ссылке)
+**scan_interval (Option)** | update interval, default 120 sec (интервал обновления сенсора, по умолчанию 120 сек)
