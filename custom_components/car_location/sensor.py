@@ -7,8 +7,6 @@ from homeassistant.const import (ATTR_LATITUDE, ATTR_LONGITUDE)
 
 ATTR_SPEED = 'speed'
 
-
-
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None) -> None:
 
     if discovery_info is None:
@@ -48,4 +46,3 @@ class CarGPSSensor(Entity):
         attrs[ATTR_LONGITUDE] = self._car_gps._lon
         attrs[ATTR_SPEED] = self._car_gps._speed
         return attrs
-    

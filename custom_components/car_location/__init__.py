@@ -4,7 +4,7 @@ import time
 import requests
 import json
 import math
-
+from aiohttp import ClientSession
 import logging
 
 from datetime import datetime
@@ -45,7 +45,7 @@ async def async_setup(hass: HomeAssistantType, config: ConfigType) -> bool:
 
     car_gps = hass.data[DOMAIN]["car_gps"] = CarGPS(hass, username, myid)
     try:
-        await car_gps.update()
+        await car_gps.getInfoFrom()
     except:
         _LOGGER.warning("Connect to car_location failed")
         return False
@@ -73,29 +73,18 @@ class CarGPS:
         self._speed = 0
         self._last_upd = None
 
-        self.getInfoFrom()
-
-
-
-    def getInfoFrom(self, now=None):
-        try:
-            today = int(datetime.now().strftime("%s")) * 1000
-            response = requests.get('https://livegpstracks.com/viewer_coos_s.php', params={'username': self._user, 'ctp': 'one', 'code': self._myid, 'tgst': 'site', 'tgsv': 12, 'tkv11': today})
-            data = response.json()
-            self._lat = float(data[0]["lat"])
-            self._lon = float(data[0]["lng"])
-            self._speed = float(data[0]["speed"])
-            self._last_upd = data[0]["d"] + ' ' + data[0]["t"]
-        except:
-            _LOGGER.error('coudnt get parameters')
-
-    async def update(self):
-        self.getInfoFrom()
-
     async def async_update(self, now, **kwargs) -> None:
-        try:
-            await self.update()
-        except:
-            _LOGGER.warning("Update failed")
-            return
-        async_dispatcher_send(self.hass, DOMAIN)
+        await self.getInfoFrom()
+
+    async def getInfoFrom(self):
+        today = int(datetime.now().strftime("%s")) * 1000
+        url = 'https://livegpstracks.com/viewer_coos_s.php?username=' + str(self._user) + '&ctp=one&code=' + str(self._myid) + '&tgst=site&tgsv=12&tkv11=' + str(today)
+        async with ClientSession() as session:
+            async with session.get(url) as response:
+                response = await response.read()
+                data=json.loads(response.decode('utf8'))
+                self._lat = float(data[0]["lat"])
+                self._lon = float(data[0]["lng"])
+                self._speed = float(data[0]["speed"])
+                self._last_upd = data[0]["d"] + ' ' + data[0]["t"]
+                async_dispatcher_send(self.hass, DOMAIN)
