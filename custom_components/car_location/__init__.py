@@ -83,8 +83,10 @@ class CarGPS:
             async with session.get(url) as response:
                 response = await response.read()
                 data=json.loads(response.decode('utf8'))
-                self._lat = float(data[0]["lat"])
-                self._lon = float(data[0]["lng"])
-                self._speed = float(data[0]["speed"])
-                self._last_upd = data[0]["d"] + ' ' + data[0]["t"]
-                async_dispatcher_send(self.hass, DOMAIN)
+                time_gps=data[0]["d"] + ' ' + data[0]["t"]
+                if datetime.now().timestamp() - datetime.strptime(time_gps, '%Y-%m-%d %H:%M:%S').timestamp() < 90 : #фильтр от старых данных
+                    self._lat = float(data[0]["lat"])
+                    self._lon = float(data[0]["lng"])
+                    self._speed = float(data[0]["speed"])
+                    self._last_upd = data[0]["d"] + ' ' + data[0]["t"]
+                    async_dispatcher_send(self.hass, DOMAIN)
